@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_supplier_names">
+        <item>UNKNOWN</item>
+        <item>AMAZON</item>
+        <item>OVERSTOCK</item>
+        <item>EBAY</item>
+    </string-array>
+    <string-array name="array_supplier_options">Please Select</string-array>
+</resources>
