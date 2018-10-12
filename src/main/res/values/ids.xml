@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="edit_supplier_name" type="id">supplier name edit</item>
-    <item name="text_view_books" type="id">books text view</item>
-</resources>
