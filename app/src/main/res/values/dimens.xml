@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- margin for flotting action button -->
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Standard margin value for the app -->
+    <dimen name="activity_margin">16dp</dimen>
+
+    <!-- list_item -->
+    <dimen name="list_item_margin">16dp</dimen>
+    <dimen name="list_item_textview_marginRight">10dp</dimen>
+    <dimen name="list_item_linearlayout_marginLeft">5dp</dimen>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="activity_editor">0dp</dimen>
+</resources>
