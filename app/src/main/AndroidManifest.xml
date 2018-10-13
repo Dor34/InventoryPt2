@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.bookstore">
+    package="com.example.android.bookstore.activity">
 
     <application
         android:allowBackup="true"
@@ -36,7 +36,7 @@
 
         <provider
             android:authorities="com.example.android.bookstore"
-            android:name=".data.InventoryProvider"
+            android:name="com.example.android.bookstore.data.InventoryProvider"
             android:exported="false"/>
 
     </application>

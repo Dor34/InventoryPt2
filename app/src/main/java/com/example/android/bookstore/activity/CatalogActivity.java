@@ -1,4 +1,4 @@
-package com.example.android.bookstore;
+package com.example.android.bookstore.activity;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
@@ -18,13 +18,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.android.bookstore.CatalogCursor;
 import com.example.android.bookstore.data.StockContract.BookEntry;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int INVENTORY_LOADER = 0;
 
-    CatalogCursor mCursorAdapter;
+    private CatalogCursor mCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

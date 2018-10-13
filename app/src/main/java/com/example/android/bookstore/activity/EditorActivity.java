@@ -1,4 +1,4 @@
-package com.example.android.bookstore;
+package com.example.android.bookstore.activity;
 
 import android.annotation.SuppressLint;
 import android.app.LoaderManager;
@@ -41,6 +41,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mProductName;
     private EditText mPrice;
     private EditText mQuantity;
+    private EditText mSupplierName;
     private EditText mSupplierPhoneNumber;
     private Spinner mSupplierNameSpinner;
 
@@ -132,6 +133,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mProductName = findViewById (R.id.edit_product_name);
         mPrice = findViewById (R.id.edit_price);
         mQuantity = findViewById (R.id.quantity_view_text);
+        mSupplierName = findViewById (R.id.edit_supplier_name);
         mSupplierPhoneNumber = findViewById (R.id.edit_phone_number);
         mSupplierNameSpinner = findViewById (R.id.supplier_spinner);
 
@@ -184,6 +186,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         String supplierPhoneNumberString = mSupplierPhoneNumber.getText ().toString ().trim ();
 
+        String supplierNameString = null;
+
         if (mCurrentUri == null){
             if (TextUtils.isEmpty (productNameString)){
                 Toast.makeText (this, "A book title is required!", Toast.LENGTH_SHORT).show ();
@@ -198,6 +202,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 return 0;
             }
 
+            if (TextUtils.isEmpty (supplierNameString)){
+                Toast.makeText (this, getString(R.string.supplier_required), Toast.LENGTH_SHORT).show ();
+                return 0;
+            }
+
             if (TextUtils.isEmpty (supplierPhoneNumberString)){
                 Toast.makeText (this, "Phone number required", Toast.LENGTH_SHORT).show ();
                 return 0;
@@ -209,6 +218,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         values.put(BookEntry.COLUMN_PRODUCT_NAME, productNameString );
         values.put(BookEntry.COLUMN_PRODUCT_PRICE, bookPriceString);
         values.put(BookEntry.COLUMN_PRODUCT_QUANTITY, quantityString);
+        values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierNameString);
         values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumberString);
 
         Uri newUri = getContentResolver ().insert (CONTENT_URI, values);

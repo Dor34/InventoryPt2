@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.bookstore.activity.CatalogActivity;
+import com.example.android.bookstore.activity.R;
 import com.example.android.bookstore.data.StockContract.BookEntry;
 
 
@@ -36,10 +38,8 @@ public class CatalogCursor extends CursorAdapter {
 
         TextView nameTextView = (TextView) view.findViewById (R.id.name);
         TextView priceTextView = (TextView) view.findViewById (R.id.price_text_view);
-        final TextView quantityTextView = (TextView) view.findViewById (R.id.quantity_view_text);
+        TextView quantityTextView = (TextView)view.findViewById (R.id.edit_quantity);
         final Button saleButton = view.findViewById (R.id.sale_button);
-        Button increaseButton = view.findViewById (R.id.increase_Button);
-        ImageButton button = (ImageButton) view.findViewById (R.id.phone_button);
 
         final int columnIdIndex = cursor.getColumnIndex (BookEntry._ID);
         int productNameColumnIndex = cursor.getColumnIndex (BookEntry.COLUMN_PRODUCT_NAME);
@@ -61,6 +61,8 @@ public class CatalogCursor extends CursorAdapter {
 
         nameTextView.setText (productName);
         priceTextView.setText (productPrice);
+        quantityTextView.setText (Integer.toString(productQuantity));
+
 
         final Uri contentUri = Uri.withAppendedPath (BookEntry.CONTENT_URI, Integer.toString (currentId));
         final Cursor cursorData = null;

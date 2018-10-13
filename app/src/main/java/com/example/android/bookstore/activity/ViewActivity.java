@@ -1,4 +1,4 @@
-package com.example.android.bookstore;
+package com.example.android.bookstore.activity;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
