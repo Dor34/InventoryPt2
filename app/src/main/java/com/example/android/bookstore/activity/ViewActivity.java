@@ -137,6 +137,7 @@ import com.example.android.bookstore.data.StockContract.BookEntry;
                 if (newUri == null) {
                     Toast.makeText(this, getString(R.string.insert_successful),
                             Toast.LENGTH_SHORT).show();
+                    finish ();
                 } else {
                     Toast.makeText(this, getString(R.string.insert_failed),
                             Toast.LENGTH_SHORT).show();

@@ -152,7 +152,7 @@ public int update(@NonNull Uri uri, ContentValues contentValues,
         }
 
         if (values.containsKey (BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER)){
-            Integer supplierPhoneNumber = values.getAsInteger (BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER);
+            String supplierPhoneNumber = values.getAsString (BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER);
             if (supplierPhoneNumber == null){
                 throw new IllegalArgumentException ("Please enter a valid phone number");
             }

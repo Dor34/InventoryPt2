@@ -41,7 +41,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mProductName;
     private EditText mPrice;
     private EditText mQuantity;
-    private EditText mSupplierName;
     private EditText mSupplierPhoneNumber;
     private Spinner mSupplierNameSpinner;
 
@@ -114,12 +113,16 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 mSupplierPhoneNumber = (EditText) findViewById (R.id.edit_phone_number);
 
                 Intent intent = new Intent (Intent.ACTION_DIAL);
-                intent.setData (Uri.parse ("tel:" + mSupplierPhoneNumberString));
-                startActivity (intent);
+
+                //Verify intent will resolve
+                if(intent.resolveActivity (getPackageManager ()) != null){
+                    startActivity (intent);
                 }
+
+                intent.setData (Uri.parse ("tel:" + mSupplierPhoneNumberString));
+            }
         });
 
-        Intent intent = getIntent ();
         mCurrentUri = getIntent().getData ();
 
         if (mCurrentUri == null){
@@ -133,7 +136,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mProductName = findViewById (R.id.edit_product_name);
         mPrice = findViewById (R.id.edit_price);
         mQuantity = findViewById (R.id.quantity_view_text);
-        mSupplierName = findViewById (R.id.edit_supplier_name);
         mSupplierPhoneNumber = findViewById (R.id.edit_phone_number);
         mSupplierNameSpinner = findViewById (R.id.supplier_spinner);
 
@@ -177,7 +179,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             });
         }
 
-    private int saveBook(){
+    private void saveBook(){
         String productNameString = mProductName.getText ().toString ().trim ();
 
         String bookPriceString = mPrice.getText ().toString ().trim ();
@@ -186,30 +188,23 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         String supplierPhoneNumberString = mSupplierPhoneNumber.getText ().toString ().trim ();
 
-        String supplierNameString = null;
-
         if (mCurrentUri == null){
             if (TextUtils.isEmpty (productNameString)){
                 Toast.makeText (this, "A book title is required!", Toast.LENGTH_SHORT).show ();
-                return 0;
+                return;
             }
             if (TextUtils.isEmpty (bookPriceString)){
                 Toast.makeText (this, "Book price is required", Toast.LENGTH_SHORT).show ();
-                return 0;
+                return;
             }
             if (TextUtils.isEmpty (quantityString)){
                 Toast.makeText (this, "Book quantity is required", Toast.LENGTH_SHORT).show ();
-                return 0;
-            }
-
-            if (TextUtils.isEmpty (supplierNameString)){
-                Toast.makeText (this, getString(R.string.supplier_required), Toast.LENGTH_SHORT).show ();
-                return 0;
+                return;
             }
 
             if (TextUtils.isEmpty (supplierPhoneNumberString)){
                 Toast.makeText (this, "Phone number required", Toast.LENGTH_SHORT).show ();
-                return 0;
+                return;
             }
         }
 
@@ -218,30 +213,39 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         values.put(BookEntry.COLUMN_PRODUCT_NAME, productNameString );
         values.put(BookEntry.COLUMN_PRODUCT_PRICE, bookPriceString);
         values.put(BookEntry.COLUMN_PRODUCT_QUANTITY, quantityString);
-        values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierNameString);
+        values.put(BookEntry.COLUMN_SUPPLIER_NAME, String.valueOf (mSupplierNameSpinner));
         values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumberString);
 
         Uri newUri = getContentResolver ().insert (CONTENT_URI, values);
 
         if (newUri == null){
-            Toast.makeText (this, getString (R.string.insert_successful), Toast.LENGTH_SHORT).show ();
+            Toast.makeText (this, getString (R.string.insert_failed), Toast.LENGTH_SHORT).show ();
+            finish ();
+            return;
         }else{
+            Toast.makeText (this, getString (R.string.insert_successful), Toast.LENGTH_SHORT).show ();
+
             if (TextUtils.isEmpty (productNameString)){
                 Toast.makeText (this, getString(R.string.book_title_required), Toast.LENGTH_SHORT).show ();
-                return 0;
+                finish ();
+                return;
+            }else{
+                Toast.makeText (this, getString (R.string.insert_failed), Toast.LENGTH_SHORT).show ();
             }
             if (TextUtils.isEmpty (bookPriceString)){
                 Toast.makeText (this, getString(R.string.book_price_required), Toast.LENGTH_SHORT).show ();
-                return 0;
+                finish ();
+                return;
             }
-
             if (TextUtils.isEmpty (quantityString)){
                 Toast.makeText (this, getString(R.string.quantity_required), Toast.LENGTH_SHORT).show ();
-                return 0;
+                finish ();
+                return;
             }
             if (TextUtils.isEmpty (supplierPhoneNumberString)){
                 Toast.makeText (this, getString(R.string.phone_number_required), Toast.LENGTH_SHORT).show ();
-                return 0;
+                finish ();
+                return;
             }
         }
 
@@ -255,7 +259,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             try {
                 price = Integer.parseInt (bookPriceString);
             }catch (NumberFormatException e){
-                return 0;
+                return;
             }
         }
         values.put(BookEntry.COLUMN_PRODUCT_PRICE, bookPriceString);
@@ -268,11 +272,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         int rowsAffected = getContentResolver ().update (mCurrentUri, values, null, null);
             if (rowsAffected == 0){
                 Toast.makeText (this, getString (R.string.update_successful), Toast.LENGTH_SHORT).show ();
+                finish ();
             }else{
                Toast.makeText (this, getString (R.string.update_failed), Toast.LENGTH_SHORT).show ();
                finish ();
             }
-        return rowsAffected;
     }
 
     @Override
