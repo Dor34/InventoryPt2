@@ -145,9 +145,3 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     public void saleButton(Integer integer, int productQuantity) {
     }
 }
-
-
-
-
-
-

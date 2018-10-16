@@ -6,7 +6,9 @@ import android.provider.BaseColumns;
 
 public final class StockContract {
 
-    private StockContract(){}
+    private StockContract(){
+        throw new AssertionError ("No instances for you!");
+    }
 
     static final String CONTENT_AUTHORITY = "com.example.android.bookstore";
 
