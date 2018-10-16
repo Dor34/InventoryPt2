@@ -2,7 +2,7 @@
 
 Inventory-App
 
-Android Basics Nanodegree - Project 8 Inventory App
+Android Basics Nanodegree - Project 9 Inventory App
 
 This project introduces students to using SQLite databases within Android apps. This app, once complete, will be able to function as an editable inventory list for a store setting.
 
