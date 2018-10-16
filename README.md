@@ -1,4 +1,3 @@
- InventoryPt2/Capture+_2018-10-16-00-58-55.png 
 
 Inventory-App
 
