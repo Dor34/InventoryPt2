@@ -103,7 +103,9 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout style="@style/ActivityEditorLinearLayoutsection1">
+    <LinearLayout
+        style="@style/ActivityEditorLinearLayoutsection1"
+        android:layout_height="wrap_content">
 
         <TextView
             style="@style/ProductAddTextStyle"
@@ -120,7 +122,7 @@
             android:spinnerMode="dropdown"
             android:textColor="#1236d6" />
 
-        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout style="@style/ActivityEditorLinearLayoutsection1">
 
